@@ -4,7 +4,8 @@ import styled from 'styled-components'
 const HeaderContainer = styled.header`
     padding: 4em;
     text-align: center;
-    background: rebeccapurple;
+    color: #F0F5F9;
+    background: #1e2022;
     `;
 
 class Header extends Component {
