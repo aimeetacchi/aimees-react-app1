@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 import axios from 'axios';
-
+import Weather from './weather';
 
 const Container = styled.div`
     padding: 4em;
@@ -19,7 +19,9 @@ class Main extends Component {
             lat: 0,
             long: 0,
             town: '',
-            temp: [],
+            country: '',
+            main: {},
+            wind: {},
             weather: [],
             foundLocation: false,
         }
@@ -39,9 +41,9 @@ class Main extends Component {
             this.setState({
                 foundLocation: true,
                 long: crd.longitude,
-                lat: crd.latitude
+                lat: crd.latitude,
             });
-            
+
             this.setState({
                 statusText: `Successfully found you at ${this.state.lat},${this.state.long}`
             });
@@ -49,8 +51,17 @@ class Main extends Component {
 
             const {long, lat} = this.state;
             axios.get("https://fcc-weather-api.glitch.me/api/current?lat="+lat+"&lon="+long)
-                .then((response) => {
-                    console.log(response);
+                .then((res) => {
+                    console.log(res.data);
+                    
+                    this.setState({
+                        main: res.data.main,
+                        town: res.data.name,
+                        country: res.data.sys.country,
+                        wind: res.data.wind,
+                        weather: res.data.weather,
+                    });
+                       
                 })
                 .catch((error) => {
                     console.log(error);
@@ -66,7 +77,7 @@ class Main extends Component {
                 {statusText: 'Your browser does not support geolocation...'}
                 );
         } else {
-            navigator.geolocation.getCurrentPosition(success, error, {timeout: 5000,});
+            navigator.geolocation.getCurrentPosition(success, error);
         }
 
 
@@ -81,7 +92,7 @@ class Main extends Component {
         if(this.state.foundLocation) {
             weatherText = this.state.statusText;
         } else {
-            weatherText = this.state.statusText;
+            weatherText = 'Getting the data....';
         }
 
       return (
@@ -89,6 +100,7 @@ class Main extends Component {
             <div className="weatherApp">
             <h2>Weather info will display here</h2>
             <p>{weatherText}</p>
+            <Weather data={this.state} />
             </div>
         </Container>  
       )
