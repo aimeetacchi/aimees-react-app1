@@ -12,3 +12,41 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.c,
+.f{
+	font-size: 2rem;
+	display: inline-block;
+}
+
+.f {
+	display: none;
+}
+.f,
+.c {
+	padding: 0 .5em;
+}
+#f,
+#c {
+	cursor: pointer;
+	transition: all .5s ease-out;
+	
+}
+#f:hover,
+#c:hover {
+  color: #455D7A;
+}
+
+.city-name {
+	font-size: 1.5rem;
+}
+.icon img {
+	width: 80px;
+  display: block;
+  margin: 0 auto;
+}
+
+.tiny {
+	font-size: 1.5rem;
+}
+

@@ -92,7 +92,7 @@ class Main extends Component {
         if(this.state.foundLocation) {
             weatherText = this.state.statusText;
         } else {
-            weatherText = 'Getting the data....';
+            weatherText = 'Getting the GPS....';
         }
 
       return (
